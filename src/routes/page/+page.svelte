@@ -1,5 +1,5 @@
 <script>
-    var word = "this is a different page :)"
+    var word = "meow"
 
 
 </script>
