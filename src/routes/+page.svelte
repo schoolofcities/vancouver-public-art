@@ -1,5 +1,5 @@
 <script>
-    var word = "this is a different page :)"
+    var word = "Thisi is the main page for Vancouver Public Art! :)"
 
 
 </script>
@@ -13,7 +13,16 @@
 
 
 <style>
+    @font-face {
+		font-family: TradeGothicBold;
+		src: url("./assets/Trade Gothic LT Bold.ttf");
+	}
+	:root {
+		font-family: 'Roboto', sans-serif;
+	}
+    
     #content {
-        background-color: yellow;
+        background-color: #1E3765;
+        color: #F6F6F5;
     }
 </style>

@@ -21,5 +21,6 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"maplibre-gl": "^3.2.1"
 	}
 }
