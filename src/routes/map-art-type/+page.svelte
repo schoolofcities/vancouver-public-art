@@ -10,7 +10,7 @@
   let pageWidth;
 
   onMount(() => {
-	const maxBounds = [ 
+    const maxBounds = [ 
 		[-123.3, 49.15], //SW coords
 		[-122.6, 49.35] //NE coords
 		];
@@ -94,15 +94,37 @@
 				'paint': {
 					'circle-radius': 5,
 					'circle-color': [
-						'match',
-						['get', 'status'],
-						'In place',
-						'#CC322B', //3F7671, 93677D, 8095D6
-						'No longer in place',
-						'#223b53', //A1B053
-						'Deaccessioned',
-						'#EEA950',
-						//others
+                        'match',
+						['get', 'type'],
+						'Sculpture',
+						'#CC322B',
+						'Memorial or monument',
+						'#036A5F',
+            'Mural',
+            '#EEA950',
+            'Site-integrated work',
+            '#223B53',
+            'Socially engaged art',
+            '#8C6F56',
+            'Media work',
+            '#245E41',
+            'Two-dimensional artwork',
+            '#813E41',
+            'Mosaic',
+            '#824F26',
+            'Relief',
+            '#717A70',
+            'Totem pole',
+            '#2086C2',
+            'Gateway',
+            '#FD85E0',
+            'Fountain or water feature',
+            '#E6E679',
+            'Welcome figure',
+            '#F4978E',
+            'Figurative',
+            '#7EC629',
+						//Other
 						'#ccc'
 					]
 				},
@@ -127,7 +149,6 @@
 		const siteaddress = e.features[0].properties.siteaddress;
 		const primarymaterial = e.features[0].properties.primarymaterial;
 		const photo = e.features[0].properties.photourl;
-		const year = e.features[0].properties.yearofinstallation;
 
 		// Organize popup infomration
 		const htmlContent = "<p> <b> <h3>" + title + "</h3> </b> </p>" + 
@@ -136,8 +157,7 @@
 							"<p> <b>Current Status: </b>" + status + "</p>" + 
 							"<p> <b>Primary Material: </b>" + primarymaterial + "</p>" +
 							"<p> <b>Address: </b>" + siteaddress + "</p>" +
-							"<p> <b>Year of Installation: </b>" + year + "</p>" +
-							"<p> <b>Photo: </b> <br> <img src='" + photo + "'> </p>"
+							"<p> <b>Photo: </b> <br> <img src=" + photo + "> </p>" 
 
 		// Populate the popup
 		popup.setLngLat(coordinates).setHTML(htmlContent).addTo(map);
@@ -156,22 +176,6 @@
   </div>
 
   <div id='map'></div>
-
-  <div class='legend'>
-    <h4>Legend</h4>
-    <div class='legend-item'>
-      <span class='legend-color' style='background-color: #CC322B;'></span>
-      In place
-    </div>
-    <div class='legend-item'>
-      <span class='legend-color' style='background-color: #223b53;'></span>
-      No longer in place
-    </div>
-    <div class='legend-item'>
-      <span class='legend-color' style='background-color: #EEA950;'></span>
-      Deaccessioned
-    </div>
-  </div>
 </main>
 
 <style>
@@ -196,38 +200,8 @@
     position: relative;
   }
 
-.popup {
-	position: relative;
-	max-height: 80vh; /* Set the maximum height of the popup */
-    overflow-y: auto;
+.maplibregl-popup {
+    max-width: 400px;
     font: 12px/20px 
 }
-
-.legend {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    background-color: white;
-    padding: 10px;
-    border-radius: 5px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-  }
-
-  .legend h4 {
-    margin-bottom: 10px;
-  }
-
-  .legend-item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 5px;
-  }
-
-  .legend-color {
-    width: 15px;
-    height: 15px;
-    margin-right: 5px;
-    border-radius: 50%;
-  }
-
 </style>
