@@ -224,8 +224,8 @@
   }
 
   .legend-color {
-    width: 15px;
-    height: 15px;
+    width: 13px;
+    height: 13px;
     margin-right: 5px;
     border-radius: 50%;
   }

@@ -107,7 +107,7 @@
             'Socially engaged art',
             '#8C6F56',
             'Media work',
-            '#245E41',
+            '#390493',
             'Two-dimensional artwork',
             '#813E41',
             'Mosaic',
@@ -149,6 +149,7 @@
 		const siteaddress = e.features[0].properties.siteaddress;
 		const primarymaterial = e.features[0].properties.primarymaterial;
 		const photo = e.features[0].properties.photourl;
+		const year = e.features[0].properties.yearofinstallation;
 
 		// Organize popup infomration
 		const htmlContent = "<p> <b> <h3>" + title + "</h3> </b> </p>" + 
@@ -157,7 +158,8 @@
 							"<p> <b>Current Status: </b>" + status + "</p>" + 
 							"<p> <b>Primary Material: </b>" + primarymaterial + "</p>" +
 							"<p> <b>Address: </b>" + siteaddress + "</p>" +
-							"<p> <b>Photo: </b> <br> <img src=" + photo + "> </p>" 
+							"<p> <b>Year of Installation: </b>" + year + "</p>" +
+							"<p> <b>Photo: </b> <br> <img src='" + photo + "'> </p>"
 
 		// Populate the popup
 		popup.setLngLat(coordinates).setHTML(htmlContent).addTo(map);
@@ -176,6 +178,66 @@
   </div>
 
   <div id='map'></div>
+
+  <div class='legend'>
+    <h4>Legend</h4>
+    <div class='legend-item'>
+      <span class='legend-color' style='background-color: #7EC629;'></span>
+      Figurative
+    </div>
+    <div class='legend-item'>
+      <span class='legend-color' style='background-color: #E6E679;'></span>
+      Fountain or water feature
+    </div>
+    <div class='legend-item'>
+      <span class='legend-color' style='background-color: #FD85E0;'></span>
+      Gateway
+    </div>
+    <div class='legend-item'>
+      <span class='legend-color' style='background-color: #036A5F;'></span>
+      Memorial or monument
+    </div>
+    <div class='legend-item'>
+      <span class='legend-color' style='background-color: #390493;'></span>
+      Media work
+    </div>
+    <div class='legend-item'>
+      <span class='legend-color' style='background-color: #824F26;'></span>
+      Mosaic
+    </div>
+    <div class='legend-item'>
+      <span class='legend-color' style='background-color: #EEA950;'></span>
+      Mural
+    </div>
+    <div class='legend-item'>
+      <span class='legend-color' style='background-color: #717A70;'></span>
+      Relief
+    </div>
+    <div class='legend-item'>
+      <span class='legend-color' style='background-color: #CC322B;'></span>
+      Sculpture
+    </div>
+    <div class='legend-item'>
+      <span class='legend-color' style='background-color: #223B53;'></span>
+      Site-integrated work
+    </div>
+    <div class='legend-item'>
+      <span class='legend-color' style='background-color: #8C6F56;'></span>
+      Socially engaged art
+    </div>
+    <div class='legend-item'>
+      <span class='legend-color' style='background-color: #2086C2;'></span>
+      Totem pole
+    </div>
+    <div class='legend-item'>
+      <span class='legend-color' style='background-color: #813E41;'></span>
+      Two-dimensional artwork
+    </div>
+    <div class='legend-item'>
+      <span class='legend-color' style='background-color: #F4978E;'></span>
+      Welcome figure
+    </div>
+  </div>
 </main>
 
 <style>
@@ -204,4 +266,31 @@
     max-width: 400px;
     font: 12px/20px 
 }
+
+.legend {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  }
+
+  .legend h4 {
+    margin-bottom: 10px;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+
+  .legend-color {
+    width: 13px;
+    height: 13px;
+    margin-right: 5px;
+    border-radius: 50%;
+  }
 </style>
