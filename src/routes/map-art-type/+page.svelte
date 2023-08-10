@@ -10,7 +10,7 @@
   let pageWidth;
 
   onMount(() => {
-	const maxBounds = [ 
+    const maxBounds = [ 
 		[-123.3, 49.15], //SW coords
 		[-122.6, 49.35] //NE coords
 		];
@@ -94,15 +94,37 @@
 				'paint': {
 					'circle-radius': 5,
 					'circle-color': [
-						'match',
-						['get', 'status'],
-						'In place',
-						'#CC322B', //3F7671, 93677D, 8095D6
-						'No longer in place',
-						'#223b53', //A1B053
-						'Deaccessioned',
-						'#EEA950',
-						//others
+                        'match',
+						['get', 'type'],
+						'Sculpture',
+						'#CC322B',
+						'Memorial or monument',
+						'#036A5F',
+            'Mural',
+            '#EEA950',
+            'Site-integrated work',
+            '#223B53',
+            'Socially engaged art',
+            '#8C6F56',
+            'Media work',
+            '#390493',
+            'Two-dimensional artwork',
+            '#813E41',
+            'Mosaic',
+            '#824F26',
+            'Relief',
+            '#717A70',
+            'Totem pole',
+            '#2086C2',
+            'Gateway',
+            '#FD85E0',
+            'Fountain or water feature',
+            '#E6E679',
+            'Welcome figure',
+            '#F4978E',
+            'Figurative',
+            '#7EC629',
+						//Other
 						'#ccc'
 					]
 				},
@@ -160,16 +182,60 @@
   <div class='legend'>
     <h4>Legend</h4>
     <div class='legend-item'>
-      <span class='legend-color' style='background-color: #CC322B;'></span>
-      In place
+      <span class='legend-color' style='background-color: #7EC629;'></span>
+      Figurative
     </div>
     <div class='legend-item'>
-      <span class='legend-color' style='background-color: #223b53;'></span>
-      No longer in place
+      <span class='legend-color' style='background-color: #E6E679;'></span>
+      Fountain or water feature
+    </div>
+    <div class='legend-item'>
+      <span class='legend-color' style='background-color: #FD85E0;'></span>
+      Gateway
+    </div>
+    <div class='legend-item'>
+      <span class='legend-color' style='background-color: #036A5F;'></span>
+      Memorial or monument
+    </div>
+    <div class='legend-item'>
+      <span class='legend-color' style='background-color: #390493;'></span>
+      Media work
+    </div>
+    <div class='legend-item'>
+      <span class='legend-color' style='background-color: #824F26;'></span>
+      Mosaic
     </div>
     <div class='legend-item'>
       <span class='legend-color' style='background-color: #EEA950;'></span>
-      Deaccessioned
+      Mural
+    </div>
+    <div class='legend-item'>
+      <span class='legend-color' style='background-color: #717A70;'></span>
+      Relief
+    </div>
+    <div class='legend-item'>
+      <span class='legend-color' style='background-color: #CC322B;'></span>
+      Sculpture
+    </div>
+    <div class='legend-item'>
+      <span class='legend-color' style='background-color: #223B53;'></span>
+      Site-integrated work
+    </div>
+    <div class='legend-item'>
+      <span class='legend-color' style='background-color: #8C6F56;'></span>
+      Socially engaged art
+    </div>
+    <div class='legend-item'>
+      <span class='legend-color' style='background-color: #2086C2;'></span>
+      Totem pole
+    </div>
+    <div class='legend-item'>
+      <span class='legend-color' style='background-color: #813E41;'></span>
+      Two-dimensional artwork
+    </div>
+    <div class='legend-item'>
+      <span class='legend-color' style='background-color: #F4978E;'></span>
+      Welcome figure
     </div>
   </div>
 </main>
@@ -196,10 +262,8 @@
     position: relative;
   }
 
-.popup {
-	position: relative;
-	max-height: 80vh; /* Set the maximum height of the popup */
-    overflow-y: auto;
+.maplibregl-popup {
+    max-width: 400px;
     font: 12px/20px 
 }
 
@@ -229,5 +293,4 @@
     margin-right: 5px;
     border-radius: 50%;
   }
-
 </style>
