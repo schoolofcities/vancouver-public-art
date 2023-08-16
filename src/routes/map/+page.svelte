@@ -1,13 +1,12 @@
 <script>
   import { onMount } from 'svelte';
   import maplibregl from 'maplibre-gl';
-  import Navbar from '../../lib/Navbar.svelte';
   import vancouverPublicArt from '../../data/vancouver-public-art.geo.json';
   import vancouverPublicTransit from '../../data/vancouver-transit.geo.json';
   import vancouverBoundary from '../../data/city-of-vancouver-boundary.geo.json';
 
   let map;
-  let pageWidth;
+  let publicartStatus = '';
 
   onMount(() => {
 	const maxBounds = [ 
@@ -110,55 +109,74 @@
 			});
     });
 
+
 	// Create pop-up 
 	const popup = new maplibregl.Popup({ 
-		closeButton: false,
-        closeOnClick: false
-        });
+		closeButton: true,
+    closeOnClick: true,
+    maxWidth: 'none',
+    });
 
-	map.on('mouseenter', 'vancouverPublicArt', (e) => {
-        map.getCanvas().style.cursor = 'pointer';
-	
-		const coordinates = e.features[0].geometry.coordinates.slice();
-		const title = e.features[0].properties.title_of_work; 
-		const projectstatement = e.features[0].properties.artistprojectstatement;
-		const type = e.features[0].properties.type;
-		const status = e.features[0].properties.status;
-		const siteaddress = e.features[0].properties.siteaddress;
-		const primarymaterial = e.features[0].properties.primarymaterial;
-		const photo = e.features[0].properties.photourl;
-		const year = e.features[0].properties.yearofinstallation;
+	map.on('click', 'vancouverPublicArt', (e) => {
+    map.flyTo({
+                center: e.features[0].geometry.coordinates,
+                zoom: 17
+            });
+    const coordinates = e.features[0].geometry.coordinates.slice();
+    const title = e.features[0].properties.title_of_work;
+    const description = e.features[0].properties.descriptionofwork;
+    const type = e.features[0].properties.type;
+    const status = e.features[0].properties.status;
+    const siteaddress = e.features[0].properties.siteaddress;
+    const primarymaterial = e.features[0].properties.primarymaterial;
+    const photoURL = "https://opendata.vancouver.ca/explore/dataset/public-art/files/";
+    const photoID = e.features[0].properties.photourl.id;
+    const year = e.features[0].properties.yearofinstallation;
 
-		// Organize popup infomration
-		const htmlContent = "<p> <b> <h3>" + title + "</h3> </b> </p>" + 
-							"<p>" + projectstatement + "</p>" + 
-							"<p> <b>Type: </b>" + type + "</p>" + 
-							"<p> <b>Current Status: </b>" + status + "</p>" + 
-							"<p> <b>Primary Material: </b>" + primarymaterial + "</p>" +
-							"<p> <b>Address: </b>" + siteaddress + "</p>" +
-							"<p> <b>Year of Installation: </b>" + year + "</p>" +
-							"<p> <b>Photo: </b> <br> <img src='" + photo + "'> </p>"
+    // Organize popup information
+    const htmlContent =
+        "<p> <b> <h3>" + title + "</h3> </b> </p>" +
+        "<p> <img src='" + photoURL + photoID + "/download/' width=300 height=240> </p>" +
+        "<p> <b>Description: </b>" + description + "</p>" +
+        "<p> <b>Type: </b>" + type + "</p>" +
+        "<p> <b>Current Status: </b>" + status + "</p>" +
+        "<p> <b>Primary Material: </b>" + primarymaterial + "</p>" +
+        "<p> <b>Address: </b>" + siteaddress + "</p>" +
+        "<p> <b>Year of Installation: </b>" + year + "</p>";
 
 		// Populate the popup
-		popup.setLngLat(coordinates).setHTML(htmlContent).addTo(map);
-        });
+		popup.setLngLat(coordinates).setHTML(htmlContent);
+    document.getElementById('popup').innerHTML = htmlContent;
+    });
 
-		map.on('mouseleave', 'vancouverPublicArt', () => {
-            map.getCanvas().style.cursor = '';
-            popup.remove();
-        });
-  });
+  // Update map filter on dropdown change
+  function updateMapFilter() {
+    let filter;
+    
+    if (publicartStatus === 'All') {
+        filter = null; // No filtering if 'All' is selected
+    } else {
+        filter = ['==', 'status', publicartStatus];
+    }
+    map.setFilter('vancouverPublicArt', filter);
+    }
+    //const filter =
+      //publicartStatus === 'All' ? ['has', 'status'] : ['==', 'status', publicartStatus];
+    //map.setFilter('vancouverPublicArt', filter);
+    //}
+
+    document.getElementById('artstatus').addEventListener('change', (e) => {
+      publicartStatus = e.target.value;
+      updateMapFilter();
+      });  
+});
 </script>
 
 <main>
-  <div class='bar'>
-    <Navbar />
-  </div>
-
   <div id='map'></div>
 
   <div class='legend'>
-    <h4>Legend</h4>
+    <h4>Vancouver Public Art</h4>
     <div class='legend-item'>
       <span class='legend-color' style='background-color: #CC322B;'></span>
       In place
@@ -172,6 +190,25 @@
       Deaccessioned
     </div>
   </div>
+
+  <div class='popup' id='popup'></div>
+
+  <div class='map-overlay-dropdown'>
+    <form>
+      <fieldset>
+          <select id="artstatus">
+              <label>Select Public Art Status</label>
+              <select id="astatus" name="astatus">
+                  <option value="" disabled selected>artwork status is?</option>
+                  <option value="In place">In place</option>
+                  <option value="No longer in place">No longer in place</option>
+                  <option value="Deaccessioned">Deaccessioned</option>
+                  <option value="All">Show all</option>
+              </select>
+          </select>
+      </fieldset> 
+    </form>
+   </div>
 </main>
 
 <style>
@@ -184,12 +221,8 @@
     font-family: 'Roboto', sans-serif;
   }
 
-  .bar {
-    text-align: center;
-  }
-
   #map {
-    height: calc(100vh - 60px); /* calculate height of the screen minus the heading */
+    height: 100vh;
     width: 100%;
     top: 0;
     left: 0;
@@ -197,16 +230,23 @@
   }
 
 .popup {
-	position: relative;
-	max-height: 80vh; /* Set the maximum height of the popup */
-    overflow-y: auto;
-    font: 12px/20px 
+	position: absolute;
+  top: 2vh;
+  right: 15px;
+  width: 300px; /* Set a fixed width for the popup */
+  max-height: 100vh; /* Calculate the max height based on viewport height */
+  overflow-y: scroll; /* Enable vertical scrolling when content overflows */
+  font: 15px 'Trade Gothic LT Bold';
+  background-color: white;
+  padding: 10px;
+  border-radius: 5px;
 }
 
 .legend {
     position: absolute;
-    bottom: 20px;
-    right: 20px;
+    bottom: 45px;
+    left: 10px;
+    font: 17px 'Trade Gothic LT Bold';
     background-color: white;
     padding: 10px;
     border-radius: 5px;
@@ -229,5 +269,17 @@
     margin-right: 5px;
     border-radius: 50%;
   }
+
+  .map-overlay-dropdown {
+    position: relative;
+    font: 15px/20px 'Trade Gothic LT Bold';
+    background: rgba(249, 249, 249, 0.8);
+    top: 30px;
+    left: 10px;
+    width: 200px;
+    margin: 10px 0 0 10px;
+    padding: 10px;
+    overflow: visible;
+}
 
 </style>
