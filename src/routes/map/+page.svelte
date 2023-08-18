@@ -69,7 +69,7 @@
 				'source': 'vancouverPublicTransit',
 				'layout': {},
 				'paint': {
-					'line-color': '#dfc8c8', 
+					'line-color': '#BE8F8F', 
 					'line-width': 3
 					//'line-dasharray': [5,2]
 				}
