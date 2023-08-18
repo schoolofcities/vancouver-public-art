@@ -17,7 +17,7 @@
     }
   },
   "sprite": "https://tiles.stadiamaps.com/styles/alidade-smooth/sprite",
-  "glyphs": "https://tiles.stadiamaps.com/fonts/{fontstack}/{range}.pbf",
+  "glyphs": "https://schoolofcities.github.io/fonts/fonts/{fontstack}/{range}.pbf",
   "layers": [
     {
       "id": "background",
@@ -556,7 +556,7 @@
             ""
           ]
         ],
-        "text-font": ["Stadia Regular"],
+        "text-font": ["TradeGothic LT Regular"],
         "text-max-angle": 30,
         "text-pitch-alignment": "viewport",
         "text-rotation-alignment": "map",
@@ -596,7 +596,7 @@
             ""
           ]
         ],
-        "text-font": ["Stadia Italic"],
+        "text-font": ["TradeGothic LT Italic"],
         "text-letter-spacing": 0.25,
         "text-line-height": 1.55,
         "text-pitch-alignment": "viewport",
@@ -633,7 +633,7 @@
             ""
           ]
         ],
-        "text-font": ["Stadia Italic"],
+        "text-font": ["TradeGothic LT Italic"],
         "text-letter-spacing": 0.1,
         "text-line-height": 1.55,
         "text-size": {"stops": [[0, 14], [6, 16]]}
@@ -668,7 +668,7 @@
             ""
           ]
         ],
-        "text-font": ["Stadia Italic"],
+        "text-font": ["TradeGothic LT Italic"],
         "text-letter-spacing": 0.2,
         "text-line-height": 1.55,
         "text-size": 18
@@ -709,7 +709,7 @@
             ""
           ]
         ],
-        "text-font": ["Stadia Regular"],
+        "text-font": ["TradeGothic LT Regular"],
         "text-justify": "center",
         "text-line-height": 1.55,
         "text-size": 14,
@@ -751,7 +751,7 @@
             ""
           ]
         ],
-        "text-font": ["Stadia Regular"],
+        "text-font": ["TradeGothic LT Regular"],
         "text-justify": "center",
         "text-line-height": 1.55,
         "text-size": 14,
@@ -793,7 +793,7 @@
             ""
           ]
         ],
-        "text-font": ["Stadia Regular"],
+        "text-font": ["TradeGothic LT Regular"],
         "text-justify": "center",
         "text-line-height": 1.55,
         "text-size": 14,
@@ -836,7 +836,7 @@
             ""
           ]
         ],
-        "text-font": ["Stadia Regular"],
+        "text-font": ["TradeGothic LT Regular"],
         "text-justify": "center",
         "text-letter-spacing": 0.1,
         "text-line-height": 1.55,
@@ -880,7 +880,7 @@
             ""
           ]
         ],
-        "text-font": ["Stadia Regular"],
+        "text-font": ["TradeGothic LT Regular"],
         "text-line-height": 1.55,
         "text-max-angle": 30,
         "text-pitch-alignment": "viewport",
@@ -916,7 +916,7 @@
         "symbol-avoid-edges": true,
         "symbol-placement": {"base": 1, "stops": [[10, "point"], [11, "line"]]},
         "text-field": "{ref}",
-        "text-font": ["Stadia Regular"],
+        "text-font": ["TradeGothic LT Regular"],
         "text-rotation-alignment": "viewport",
         "text-size": 10
       }
@@ -940,7 +940,7 @@
         "symbol-avoid-edges": true,
         "symbol-placement": {"base": 1, "stops": [[10, "point"], [11, "line"]]},
         "text-field": "{ref}",
-        "text-font": ["Stadia Regular"],
+        "text-font": ["TradeGothic LT Regular"],
         "text-rotation-alignment": "viewport",
         "text-size": 10
       }
@@ -964,7 +964,7 @@
         "symbol-avoid-edges": true,
         "symbol-placement": "line",
         "text-field": "{ref}",
-        "text-font": ["Stadia Regular"],
+        "text-font": ["TradeGothic LT Regular"],
         "text-rotation-alignment": "viewport",
         "text-size": 10
       }
@@ -993,7 +993,7 @@
             ""
           ]
         ],
-        "text-font": ["Stadia Regular"],
+        "text-font": ["TradeGothic LT Regular"],
         "text-justify": "center",
         "text-line-height": 1.55,
         "text-offset": [0.5, 0],
@@ -1033,7 +1033,7 @@
             ""
           ]
         ],
-        "text-font": ["Stadia Regular"],
+        "text-font": ["TradeGothic LT Regular"],
         "text-justify": "left",
         "text-line-height": 1.55,
         "text-offset": [0.5, 0.2],
@@ -1070,7 +1070,7 @@
             ""
           ]
         ],
-        "text-font": ["Stadia Regular"],
+        "text-font": ["TradeGothic LT Regular"],
         "text-line-height": 1.55,
         "text-max-width": 9,
         "text-padding": 2,
@@ -1111,7 +1111,7 @@
             ""
           ]
         ],
-        "text-font": ["Stadia Regular"],
+        "text-font": ["TradeGothic LT Regular"],
         "text-justify": "left",
         "text-line-height": 1.55,
         "text-offset": [0.5, 0.2],
@@ -1154,7 +1154,7 @@
             ""
           ]
         ],
-        "text-font": ["Stadia Regular"],
+        "text-font": ["TradeGothic LT Bold"],
         "text-justify": "left",
         "text-line-height": 1.55,
         "text-offset": [0.5, 0.2],
@@ -1203,7 +1203,7 @@
             ""
           ]
         ],
-        "text-font": ["Stadia Regular"],
+        "text-font": ["TradeGothic LT Bold"],
         "text-justify": "left",
         "text-line-height": 1.55,
         "text-offset": [0.5, 0.2],
@@ -1249,7 +1249,7 @@
             ""
           ]
         ],
-        "text-font": ["Stadia Regular"],
+        "text-font": ["TradeGothic LT Regular"],
         "text-justify": "left",
         "text-line-height": 1.55,
         "text-offset": [0.5, 0.2],
@@ -1298,7 +1298,7 @@
             ""
           ]
         ],
-        "text-font": ["Stadia Regular"],
+        "text-font": ["TradeGothic LT Regular"],
         "text-justify": "left",
         "text-line-height": 1.55,
         "text-offset": [0.5, 0.2],
@@ -1337,7 +1337,7 @@
             ""
           ]
         ],
-        "text-font": ["Stadia Regular"],
+        "text-font": ["TradeGothic LT Regular"],
         "text-line-height": 1.55,
         "text-size": 10,
         "text-transform": "uppercase",
@@ -1378,7 +1378,7 @@
             ""
           ]
         ],
-        "text-font": ["Stadia Semibold"],
+        "text-font": ["TradeGothic LT Bold Italic"],
         "text-letter-spacing": 0.05,
         "text-line-height": 1.55,
         "text-padding": 10,
@@ -1424,7 +1424,7 @@
             ""
           ]
         ],
-        "text-font": ["Stadia Semibold"],
+        "text-font": ["TradeGothic LT Bold Italic"],
         "text-letter-spacing": 0.05,
         "text-line-height": 1.55,
         "text-size": {"base": 1.4, "stops": [[0, 12], [6, 16], [9, 24]]},
@@ -1449,7 +1449,7 @@
       "filter": ["==", "class", "continent"],
       "layout": {
         "text-field": "{name:latin}",
-        "text-font": ["Stadia Bold"],
+        "text-font": ["TradeGothic LT Bold"],
         "text-letter-spacing": 0.1,
         "text-max-width": 6.25,
         "text-size": 16,

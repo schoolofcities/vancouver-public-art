@@ -1,13 +1,13 @@
 <script>
-  import { onMount } from 'svelte';
+  import { onMount, afterUpdate } from 'svelte';
   import maplibregl from 'maplibre-gl';
   import vancouverPublicArt from '../../data/vancouver-public-art.geo.json';
   import vancouverPublicTransit from '../../data/vancouver-transit.geo.json';
   import vancouverBoundary from '../../data/city-of-vancouver-boundary.geo.json';
 
   let map;
-  let publicartStatus = '';
-
+  let popupContent = '';
+  
   onMount(() => {
 	const maxBounds = [ 
 		[-123.3, 49.15], //SW coords
@@ -117,11 +117,14 @@
     maxWidth: 'none',
     });
 
+
+
 	map.on('click', 'vancouverPublicArt', (e) => {
     map.flyTo({
                 center: e.features[0].geometry.coordinates,
                 zoom: 17
             });
+    
     const coordinates = e.features[0].geometry.coordinates.slice();
     const title = e.features[0].properties.title_of_work;
     const description = e.features[0].properties.descriptionofwork;
@@ -130,7 +133,7 @@
     const siteaddress = e.features[0].properties.siteaddress;
     const primarymaterial = e.features[0].properties.primarymaterial;
     const photoURL = "https://opendata.vancouver.ca/explore/dataset/public-art/files/";
-    const photoID = e.features[0].properties.photourl.id;
+    const photoID = JSON.parse(e.features[0].properties.photourl).id;
     const year = e.features[0].properties.yearofinstallation;
 
     // Organize popup information
@@ -146,29 +149,31 @@
 
 		// Populate the popup
 		popup.setLngLat(coordinates).setHTML(htmlContent);
-    document.getElementById('popup').innerHTML = htmlContent;
+    popupContent = htmlContent;
+    //document.getElementById('popup').innerHTML = htmlContent;
     });
 
-  // Update map filter on dropdown change
-  function updateMapFilter() {
-    let filter;
-    
-    if (publicartStatus === 'All') {
-        filter = null; // No filtering if 'All' is selected
-    } else {
-        filter = ['==', 'status', publicartStatus];
-    }
-    map.setFilter('vancouverPublicArt', filter);
-    }
-    //const filter =
-      //publicartStatus === 'All' ? ['has', 'status'] : ['==', 'status', publicartStatus];
-    //map.setFilter('vancouverPublicArt', filter);
-    //}
+    // Update map filter on dropdown change
+    document.getElementById('thelist').addEventListener('change', (e) => {
+      //if the selected dropdown element has index 1, filter the 'vancouverPublicArt' layer to show only public art with the status of in place
+      if (document.getElementById("thelist").selectedIndex===1) {
+          map.setFilter('vancouverPublicArt', ['==', ['get', 'status'], 'In place']);
+      } 
+      //if the selected dropdown element has index 2, filter the 'vancouverPublicArt' layer to show only public art with the status of no longer in place
+      else if (document.getElementById("thelist").selectedIndex===2) {
+          map.setFilter('vancouverPublicArt', ['==', ['get', 'status'], 'No longer in place']);
+      } 
+      //if the selected dropdown element has index 3, filter the 'vancouverPublicArt' layer to show only public art with the status of deaccessioned
+      else if (document.getElementById("thelist").selectedIndex===3) {
+          map.setFilter('vancouverPublicArt', ['==', ['get', 'status'], 'Deaccessioned']);
+      } 
+      //if the selected dropdown element has index 0 , remove the 'vancouverPublicArt' layer filter to show all public art
+      else if (document.getElementById("thelist").selectedIndex===0) {
+          map.setFilter('vancouverPublicArt', null);
+      } 
+    });
 
-    document.getElementById('artstatus').addEventListener('change', (e) => {
-      publicartStatus = e.target.value;
-      updateMapFilter();
-      });  
+
 });
 </script>
 
@@ -191,22 +196,22 @@
     </div>
   </div>
 
-  <div class='popup' id='popup'></div>
+  <div class='popup' id='popup'>
+  {#if popupContent}
+    <p>{@html popupContent}</p>
+  {/if}
+  </div>
 
   <div class='map-overlay-dropdown'>
     <form>
-      <fieldset>
-          <select id="artstatus">
-              <label>Select Public Art Status</label>
-              <select id="astatus" name="astatus">
-                  <option value="" disabled selected>artwork status is?</option>
-                  <option value="In place">In place</option>
-                  <option value="No longer in place">No longer in place</option>
-                  <option value="Deaccessioned">Deaccessioned</option>
-                  <option value="All">Show all</option>
+              <label>The artwork status is:</label>
+              <select id="thelist">
+                  <option value="" disabled selected> Please select a status</option>
+                  <option value="2">In place</option>
+                  <option value="3">No longer in place</option>
+                  <option value="4">Deaccessioned</option>
+                  <option value="1">Show all</option>
               </select>
-          </select>
-      </fieldset> 
     </form>
    </div>
 </main>
@@ -215,10 +220,6 @@
   @font-face {
     font-family: TradeGothicBold;
     src: url('./assets/Trade Gothic LT Bold.ttf');
-  }
-
-  :root {
-    font-family: 'Roboto', sans-serif;
   }
 
   #map {
@@ -234,7 +235,7 @@
   top: 2vh;
   right: 15px;
   width: 300px; /* Set a fixed width for the popup */
-  max-height: 100vh; /* Calculate the max height based on viewport height */
+  max-height: 93vh; /* Calculate the max height based on viewport height */
   overflow-y: scroll; /* Enable vertical scrolling when content overflows */
   font: 15px 'Trade Gothic LT Bold';
   background-color: white;
@@ -271,14 +272,16 @@
   }
 
   .map-overlay-dropdown {
-    position: relative;
-    font: 15px/20px 'Trade Gothic LT Bold';
-    background: rgba(249, 249, 249, 0.8);
-    top: 30px;
-    left: 10px;
-    width: 200px;
+    position: absolute;
+    font: 17px/20px 'Trade Gothic LT Bold';
+    background: rgba(249, 249, 249, 1);
+    height: 45px;
+    bottom: 195px;
+    width: 157px;
     margin: 10px 0 0 10px;
     padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
     overflow: visible;
 }
 

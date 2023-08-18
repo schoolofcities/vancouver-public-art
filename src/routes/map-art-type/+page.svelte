@@ -17,7 +17,7 @@
 	
     map = new maplibregl.Map({
 		container: 'map',
-    	style: './vector-tiles-vintage-v1.json',//'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
+    	style: './vector-tiles-vintage-v1-1.json',//'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
     	center: [-123.109, 49.257], // starting position
     	zoom: 11.3, // starting zoom
     	maxBounds: maxBounds, //maximum and minimum scroll bounds
