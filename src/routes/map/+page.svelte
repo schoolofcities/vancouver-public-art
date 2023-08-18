@@ -206,11 +206,10 @@
     <form>
               <label>The artwork status is:</label>
               <select id="thelist">
-                  <option value="" disabled selected> Please select a status</option>
+                  <option value="1">Show all</option>
                   <option value="2">In place</option>
                   <option value="3">No longer in place</option>
                   <option value="4">Deaccessioned</option>
-                  <option value="1">Show all</option>
               </select>
     </form>
    </div>
