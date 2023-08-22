@@ -9,20 +9,20 @@
   let popupContent = '';
   
   onMount(() => {
-	const maxBounds = [ 
-		[-123.3, 49.15], //SW coords
-		[-122.6, 49.35] //NE coords
-		];
+    const maxBounds = [ 
+      [-123.8, 49.0], //SW coords
+      [-122.6, 49.5] //NE coords
+    ];
 	
     map = new maplibregl.Map({
 		container: 'map',
-    	style: './vector-tiles-vintage-v3.json',//'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
-    	center: [-123.109, 49.257], // starting position
-    	zoom: 11.3, // starting zoom
-    	maxBounds: maxBounds, //maximum and minimum scroll bounds
-		projection: 'globe',
-    	scrollZoom: true,
-    	attributionControl: false,
+      style: './vector-tiles-vintage-v4.json',//'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
+      center: [-123.109, 49.257], // starting position
+      zoom: 11.3, // starting zoom
+      maxBounds: maxBounds, //maximum and minimum scroll bounds
+      projection: 'globe',
+      scrollZoom: true,
+      attributionControl: false,
 		});
 
     // Adding zoom and rotation controls to the map
