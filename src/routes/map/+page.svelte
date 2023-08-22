@@ -8,6 +8,17 @@
 
   let map;
   let popupContent = '';
+
+  let coordinates;
+  let title;
+  let description;
+  let type;
+  let status;
+  let siteaddress;
+  let primarymaterial;
+  const photoURL = "https://opendata.vancouver.ca/explore/dataset/public-art/files/";
+  let photoID;
+  let year;
   
   onMount(() => {
     const maxBounds = [ 
@@ -157,38 +168,38 @@
 
 
 	map.on('click', 'vancouverPublicArt', (e) => {
-    map.flyTo({
-                center: e.features[0].geometry.coordinates,
-                zoom: 17
-            });
+      map.flyTo({
+        center: e.features[0].geometry.coordinates,
+        zoom: 17
+      });
     
-    const coordinates = e.features[0].geometry.coordinates.slice();
-    const title = e.features[0].properties.title_of_work;
-    const description = e.features[0].properties.descriptionofwork;
-    const type = e.features[0].properties.type;
-    const status = e.features[0].properties.status;
-    const siteaddress = e.features[0].properties.siteaddress;
-    const primarymaterial = e.features[0].properties.primarymaterial;
-    const photoURL = "https://opendata.vancouver.ca/explore/dataset/public-art/files/";
-    const photoID = JSON.parse(e.features[0].properties.photourl).id;
-    const year = e.features[0].properties.yearofinstallation;
+    $: coordinates = e.features[0].geometry.coordinates.slice();
+    $: title = e.features[0].properties.title_of_work;
+    $: description = e.features[0].properties.descriptionofwork;
+    $: type = e.features[0].properties.type;
+    $: status = e.features[0].properties.status;
+    $: siteaddress = e.features[0].properties.siteaddress;
+    $: primarymaterial = e.features[0].properties.primarymaterial;
+    // $: photoURL = "https://opendata.vancouver.ca/explore/dataset/public-art/files/";
+    $: photoID = JSON.parse(e.features[0].properties.photourl).id;
+    $: year = e.features[0].properties.yearofinstallation;
 
     // Organize popup information
-    const htmlContent =
-        "<p> <b> <h3>" + title + "</h3> </b> </p>" +
-        "<p> <img src='" + photoURL + photoID + "/download/' width=300 height=240> </p>" +
-        "<p> <b>Description: </b>" + description + "</p>" +
-        "<p> <b>Type: </b>" + type + "</p>" +
-        "<p> <b>Current Status: </b>" + status + "</p>" +
-        "<p> <b>Primary Material: </b>" + primarymaterial + "</p>" +
-        "<p> <b>Address: </b>" + siteaddress + "</p>" +
-        "<p> <b>Year of Installation: </b>" + year + "</p>";
+    // const htmlContent =
+        // "<h1 id='pt'>" + title + "</h1>" +
+        // "<p> <img src='" + photoURL + photoID + "/download/' width=300 height=240> </p>" +
+        // "<p> <b>Description: </b>" + description + "</p>" +
+        // "<p> <b>Type: </b>" + type + "</p>" +
+        // "<p> <b>Current Status: </b>" + status + "</p>" +
+        // "<p> <b>Primary Material: </b>" + primarymaterial + "</p>" +
+        // "<p> <b>Address: </b>" + siteaddress + "</p>" +
+        // "<p> <b>Year of Installation: </b>" + year + "</p>";
 
 		// Populate the popup
-		popup.setLngLat(coordinates).setHTML(htmlContent);
-    popupContent = htmlContent;
+		popup.setLngLat(coordinates);
+    popupContent = true;
     //document.getElementById('popup').innerHTML = htmlContent;
-    });
+  });
 
     // Update map filter on dropdown change
     document.getElementById('thelist').addEventListener('change', (e) => {
@@ -212,6 +223,11 @@
 
 
 });
+
+$: if (popupContent) {
+  console.log(photoURL + "/" + photoID + "/download/");
+}
+
 </script>
 
 <main>
@@ -233,13 +249,20 @@
     </div>
   </div>
 
-  <div class='popup' id='popup'>
-  {#if popupContent}
-    <p>{@html popupContent}</p>
-  {/if}
+  <div class='popup'>
+    {#if popupContent}
+    <h2>{title}</h2>
+    <p><img src={photoURL + "/" + photoID + "/download/"} width=300 height=240></p>
+    <p> <span id="subtitle">Type: </span>{type}</p>
+    <p>  <span id="subtitle">Description:  </span>{description}</p>
+    <p>  <span id="subtitle">Current Status:  </span>{status}</p>
+    <p>  <span id="subtitle">Primary Material:  </span>{primarymaterial}</p>
+    <p>  <span id="subtitle">Address:  </span>{siteaddress}</p>
+    <p>  <span id="subtitle">Year of Installation:  </span>{year}</p>
+    {/if}
   </div>
 
-  <div class='map-overlay-dropdown'>
+  <!-- <div class='map-overlay-dropdown'>
     <form>
               <label>The artwork status is:</label>
               <select id="thelist">
@@ -249,13 +272,17 @@
                   <option value="4">Deaccessioned</option>
               </select>
     </form>
-   </div>
+   </div> -->
 </main>
 
 <style>
   @font-face {
     font-family: TradeGothicBold;
     src: url('../../assets/Trade Gothic LT Bold.ttf');
+  }
+  @font-face {
+    font-family: RobotoRegular;
+    src: url('../../assets/Roboto-Regular.ttf');
   }
 
   #map {
@@ -271,11 +298,11 @@
   top: 160px;
   left: 10px;
   width: 300px; /* Set a fixed width for the popup */
-  max-height: 93vh; /* Calculate the max height based on viewport height */
+  max-height: calc(100% - 300px); /* Calculate the max height based on viewport height */
   overflow-y: scroll; /* Enable vertical scrolling when content overflows */
-  font: 15px TradeGothicBold;
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.95);
   padding: 0px;
+  padding-top: 5px;
   padding-left: 10px;
   padding-right: 10px;
   border-radius: 5px;
@@ -289,7 +316,7 @@
     width: 300px;
     font-size: 17px;
     font-family: TradeGothicBold;
-    background-color: rgba(255, 255, 255, 0.75);
+    background-color: rgba(255, 255, 255, 0.95);
     color: #1E3765;
     padding: 10px;
     border-radius: 5px;
@@ -298,6 +325,7 @@
 
   h1 {
     font-size: 25px;
+    font-family: TradeGothicBold;
     padding: 0px;
     padding-bottom: 10px;
     margin: 0px;
@@ -305,6 +333,27 @@
     text-decoration: underline;
   }
 
+  h2 {
+    font-size: 22px;
+    font-family: TradeGothicBold;
+    padding: 0px;
+    margin: 0px;
+    margin-top: 8px;
+    /* margin-bottom: -4px; */
+    color: #1E3765;
+  }
+
+  #subtitle {
+    font-family: TradeGothicBold;
+    color: #1E3765;
+    font-size: 16px;
+  }
+
+  p {
+    font-family: RobotoRegular;
+    font-size: 14px;
+    opacity: 0.84;
+  }
 
   .legend-item {
     display: flex;
