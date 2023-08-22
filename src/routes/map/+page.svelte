@@ -7,7 +7,11 @@
   import notVancouverPolygon from '../../data/not-vancouver-polygon.geo.json';
 
   let map;
-  let popupContent = '';
+  let popupContent = false;
+
+  function hidePopup() {
+    popupContent = false;
+  }
 
   let coordinates;
   let title;
@@ -256,14 +260,15 @@ $: if (popupContent) {
 
   <div class='popup'>
     {#if popupContent}
-    <h2>{title}</h2>
-    <p><img src={photoURL + "/" + photoID + "/download/"} width=300 height=240></p>
-    <p> <span id="subtitle">Type: </span>{type}</p>
-    <p>  <span id="subtitle">Description:  </span>{description}</p>
-    <p>  <span id="subtitle">Current Status:  </span>{status}</p>
-    <p>  <span id="subtitle">Primary Material:  </span>{primarymaterial}</p>
-    <p>  <span id="subtitle">Address:  </span>{siteaddress}</p>
-    <p>  <span id="subtitle">Year of Installation:  </span>{year}</p>
+      <div id="hide" on:click={hidePopup}>Click Here To Hide Content</div>
+      <h2>{title}</h2>
+      <p><img src={photoURL + "/" + photoID + "/download/"} width=300 height=240></p>
+      <p> <span id="subtitle">Type: </span>{type}</p>
+      <p>  <span id="subtitle">Description:  </span>{description}</p>
+      <p>  <span id="subtitle">Current Status:  </span>{status}</p>
+      <p>  <span id="subtitle">Primary Material:  </span>{primarymaterial}</p>
+      <p>  <span id="subtitle">Address:  </span>{siteaddress}</p>
+      <p>  <span id="subtitle">Year of Installation:  </span>{year}</p>
     {/if}
   </div>
 
@@ -306,16 +311,37 @@ $: if (popupContent) {
   top: 145px;
   left: 10px;
   width: 290px; /* Set a fixed width for the popup */
-  max-height: calc(100% - 190px); /* Calculate the max height based on viewport height */
-  overflow-y: scroll; /* Enable vertical scrolling when content overflows */
-  background-color: rgba(255, 255, 255, 0.95);
+  max-height: calc(100% - 200px); /* Calculate the max height based on viewport height */
+  /* overflow-y: scroll;  */
+  background-color: rgb(254, 251, 249, 0.9);
   padding: 0px;
-  padding-top: 5px;
+  padding-top: 15px;
   padding-left: 10px;
   padding-right: 20px;
   border-radius: 5px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
   overflow-x: hidden;
+}
+
+#hide {
+  position: absolute;
+  height: 15px;
+  width: 100%;
+  padding: 0px;
+  margin: 0px;
+  top: 0px;
+  left: 0px;
+  font-family: TradeGothicBold;
+  font-size: 12px;
+  color: #9da9bd;
+  background-color: none;
+  border-bottom: solid 1px rgb(227, 227, 227);
+  z-index: 9999;
+  text-align: center;
+}
+#hide:hover {
+  color: #DC4633;
+  cursor: pointer;
 }
 
 .legend {
@@ -326,7 +352,7 @@ $: if (popupContent) {
     height: 105px;
     font-size: 17px;
     font-family: TradeGothicBold;
-    background-color: rgba(255, 255, 255, 0.95);
+    background-color: rgb(254, 251, 249, 0.9);
     color: #1E3765;
     padding: 10px;
     border-radius: 5px;
@@ -334,24 +360,32 @@ $: if (popupContent) {
   }
 
   h1 {
-    font-size: 25px;
+    font-size: 26px;
     font-family: TradeGothicBold;
     padding: 0px;
+    padding-left: 4px;
+    padding-top: 2px;
     border-bottom: solid 1px #e7e7e7;
     padding-bottom: 3px;
     margin: 0px;
     margin-bottom: 7px;
-    color: #1E3765;
+    color: #00A189;
+    /* background-color: #F1C500; */
+    background-color: #ffffff;
+    background: linear-gradient(135deg, #F1C50055 25%, transparent 25%) -4px 0/ 8px 8px, linear-gradient(225deg, #f1c50032 25%, transparent 25%) -4px 0/ 8px 8px, linear-gradient(315deg, #F1C50055 25%, transparent 25%) 0px 0/ 8px 8px, linear-gradient(45deg, #f1c50044 25%, #ffffff 25%) 0px 0/ 8px 8px;
+    /* -webkit-text-stroke: 1px #6FC7EA; */
   }
 
   h2 {
-    font-size: 22px;
+    font-size: 26px;
     font-family: TradeGothicBold;
-    padding: 0px;
+    padding: 2px;
     margin: 0px;
     margin-top: 8px;
     /* margin-bottom: -4px; */
-    color: #1E3765;
+    color: #00A189;
+    background: linear-gradient(135deg, #F1C50055 25%, transparent 25%) -4px 0/ 8px 8px, linear-gradient(225deg, #f1c50032 25%, transparent 25%) -4px 0/ 8px 8px, linear-gradient(315deg, #F1C50055 25%, transparent 25%) 0px 0/ 8px 8px, linear-gradient(45deg, #f1c50044 25%, #ffffff 25%) 0px 0/ 8px 8px;
+    /* -webkit-text-stroke: 1px #6FC7EA; */
   }
 
   #subtitle {
@@ -362,8 +396,9 @@ $: if (popupContent) {
 
   p {
     font-family: RobotoRegular;
-    font-size: 14px;
+    font-size: 13px;
     opacity: 1;
+    color: #1E3765;
   }
 
   a {
