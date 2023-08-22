@@ -91,8 +91,8 @@
 				'layout': {},
 				'paint': {
 					'line-color': '#F1C500', 
-					'line-width': 1.5
-					// 'line-dasharray': [1,1]
+					'line-width': 2,
+					'line-dasharray': [3,1]
 				}
 			}, 'highway_name_major');
 
@@ -281,6 +281,9 @@ $: if (popupContent) {
 </main>
 
 <style>
+  :global(body) {
+    overflow-y: hidden;
+  }
   @font-face {
     font-family: TradeGothicBold;
     src: url('../../assets/Trade Gothic LT Bold.ttf');
