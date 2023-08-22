@@ -4,6 +4,7 @@
   import vancouverPublicArt from '../../data/vancouver-public-art.geo.json';
   import vancouverPublicTransit from '../../data/vancouver-transit.geo.json';
   import vancouverBoundary from '../../data/city-of-vancouver-boundary.geo.json';
+  import notVancouverPolygon from '../../data/not-vancouver-polygon.geo.json';
 
   let map;
   let popupContent = '';
@@ -18,7 +19,9 @@
 		container: 'map',
       style: './vector-tiles-vintage-v4.json',//'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
       center: [-123.109, 49.257], // starting position
-      zoom: 11.3, // starting zoom
+      zoom: 11.3, // starting zoom;
+      minZoom: 8,
+      maxZoom: 17,
       maxBounds: maxBounds, //maximum and minimum scroll bounds
       projection: 'globe',
       scrollZoom: true,
@@ -59,11 +62,16 @@
     	type: 'geojson',
         data: vancouverBoundary
     });
+
+  map.addSource('notVancouverPolygon', {
+    type: 'geojson',
+      data: notVancouverPolygon
+  });
 	
-    map.addSource('vancouverPublicArt', {
-    	type: 'geojson',
-        data: vancouverPublicArt
-    });
+  map.addSource('vancouverPublicArt', {
+    type: 'geojson',
+      data: vancouverPublicArt
+  });
 	
 	map.addLayer({
 				'id': 'vancouverPublicTransit',
@@ -85,10 +93,20 @@
 				'paint': {
           'line-opacity': 0.64,
 					'line-color': '#575870', 
-					'line-width': 2,
+					'line-width': 4,
         
 					'line-dasharray': [6,0.5,1,0.5,1,0.5]}
 			}, 'highway_name_major');
+
+    map.addLayer({
+      'id': 'notVancouverPolygon',
+      'type': 'fill',
+      'source': 'notVancouverPolygon',
+      'layout': {},
+      'paint': {
+        'fill-color': 'white',
+        'fill-opacity': 0.42
+    }});
 
 	map.addLayer({
 				'id': 'vancouverPublicArt',
@@ -96,9 +114,22 @@
 				'source': 'vancouverPublicArt',
 				'layout': {},
 				'paint': {
-					'circle-radius': 5,
+					'circle-radius': [
+            'interpolate',
+            ['linear'],
+            ['zoom'],
+            0, 1,
+            12, 5,
+            18, 12
+        ],
           'circle-stroke-color': 'white', // Stroke color
-          'circle-stroke-width': 1, // Stroke width in pixels
+          'circle-stroke-width': [
+            'interpolate',
+            ['linear'],
+            ['zoom'],
+            12, 1,
+            20, 3
+        ], 
 					'circle-color': [
 						'match',
 						['get', 'status'],
@@ -187,7 +218,7 @@
   <div id='map'></div>
 
   <div class='legend'>
-    <h4>Vancouver Public Art</h4>
+    <h1>Vancouver Public Art</h1>
     <div class='legend-item'>
       <span class='legend-color' style='background-color: #CC322B;'></span>
       In place
@@ -224,7 +255,7 @@
 <style>
   @font-face {
     font-family: TradeGothicBold;
-    src: url('./assets/Trade Gothic LT Bold.ttf');
+    src: url('../../assets/Trade Gothic LT Bold.ttf');
   }
 
   #map {
@@ -237,31 +268,43 @@
 
 .popup {
 	position: absolute;
-  top: 2vh;
-  right: 15px;
+  top: 160px;
+  left: 10px;
   width: 300px; /* Set a fixed width for the popup */
   max-height: 93vh; /* Calculate the max height based on viewport height */
   overflow-y: scroll; /* Enable vertical scrolling when content overflows */
-  font: 15px 'Trade Gothic LT Bold';
+  font: 15px TradeGothicBold;
   background-color: white;
-  padding: 10px;
+  padding: 0px;
+  padding-left: 10px;
+  padding-right: 10px;
   border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 }
 
 .legend {
     position: absolute;
-    bottom: 45px;
+    top: 10px;
     left: 10px;
-    font: 17px 'Trade Gothic LT Bold';
-    background-color: white;
+    width: 300px;
+    font-size: 17px;
+    font-family: TradeGothicBold;
+    background-color: rgba(255, 255, 255, 0.75);
+    color: #1E3765;
     padding: 10px;
     border-radius: 5px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
   }
 
-  .legend h4 {
-    margin-bottom: 10px;
+  h1 {
+    font-size: 25px;
+    padding: 0px;
+    padding-bottom: 10px;
+    margin: 0px;
+    color: #1E3765;
+    text-decoration: underline;
   }
+
 
   .legend-item {
     display: flex;
