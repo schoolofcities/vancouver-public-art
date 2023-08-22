@@ -302,16 +302,17 @@ $: if (popupContent) {
 	position: absolute;
   top: 145px;
   left: 10px;
-  width: 300px; /* Set a fixed width for the popup */
+  width: 290px; /* Set a fixed width for the popup */
   max-height: calc(100% - 190px); /* Calculate the max height based on viewport height */
   overflow-y: scroll; /* Enable vertical scrolling when content overflows */
   background-color: rgba(255, 255, 255, 0.95);
   padding: 0px;
   padding-top: 5px;
   padding-left: 10px;
-  padding-right: 10px;
+  padding-right: 20px;
   border-radius: 5px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  overflow-x: hidden;
 }
 
 .legend {
@@ -379,10 +380,7 @@ $: if (popupContent) {
     padding-top:7px;
   }
 
-  img {
-    border: solid 1px white;
-    border-radius: 5px;
-  }
+
 
   .legend-item {
     display: flex;
