@@ -47,7 +47,7 @@
     map.addControl(scale, 'bottom-left');
 
     // Adding zoom and rotation controls to the map
-    map.addControl(new maplibregl.NavigationControl(), 'bottom-left');
+    map.addControl(new maplibregl.NavigationControl(), 'top-right');
 
     
 
@@ -149,7 +149,7 @@
 						'No longer in place',
 						'#DC4633', //A1B053
 						'Deaccessioned',
-						'#007FA3',
+						'#DC4633',
 						'#ccc'
 					]
 				},
@@ -165,9 +165,17 @@
     maxWidth: 'none',
     });
 
+    map.on('mouseenter', 'vancouverPublicArt', () => {
+    map.getCanvas().style.cursor = 'pointer';
+});
 
+map.on('mouseleave', 'vancouverPublicArt', () => {
+    map.getCanvas().style.cursor = '';
+});
 
 	map.on('click', 'vancouverPublicArt', (e) => {
+
+    
       map.flyTo({
         center: e.features[0].geometry.coordinates,
         zoom: 17
@@ -234,19 +242,16 @@ $: if (popupContent) {
   <div id='map'></div>
 
   <div class='legend'>
-    <h1>Vancouver Public Art</h1>
+    <h1>Vancouver Public Art Map</h1>
     <div class='legend-item'>
-      <span class='legend-color' style='background-color: #CC322B;'></span>
-      In place
+      <span class='legend-color' style='background-color: #6D247A;'></span>
+      <span class='legend-text'>In place &nbsp;</span>
+      <span class='legend-color' style='background-color: #DC4633;'></span>
+      <span class='legend-text'>No Longer In Place / Deaccessioned</span>
     </div>
-    <div class='legend-item'>
-      <span class='legend-color' style='background-color: #223b53;'></span>
-      No longer in place
-    </div>
-    <div class='legend-item'>
-      <span class='legend-color' style='background-color: #EEA950;'></span>
-      Deaccessioned
-    </div>
+    <p id="info">
+      Map created by <a href="">Irene Chang</a> and <a href="">Jeff Allen</a> at the <a href="">School of Cities</a> with data from the  <a href="">City of Vancouver</a>. More on <a href="">GitHub</a>.
+    </p>
   </div>
 
   <div class='popup'>
@@ -295,10 +300,10 @@ $: if (popupContent) {
 
 .popup {
 	position: absolute;
-  top: 160px;
+  top: 145px;
   left: 10px;
   width: 300px; /* Set a fixed width for the popup */
-  max-height: calc(100% - 300px); /* Calculate the max height based on viewport height */
+  max-height: calc(100% - 190px); /* Calculate the max height based on viewport height */
   overflow-y: scroll; /* Enable vertical scrolling when content overflows */
   background-color: rgba(255, 255, 255, 0.95);
   padding: 0px;
@@ -314,6 +319,7 @@ $: if (popupContent) {
     top: 10px;
     left: 10px;
     width: 300px;
+    height: 105px;
     font-size: 17px;
     font-family: TradeGothicBold;
     background-color: rgba(255, 255, 255, 0.95);
@@ -327,10 +333,11 @@ $: if (popupContent) {
     font-size: 25px;
     font-family: TradeGothicBold;
     padding: 0px;
-    padding-bottom: 10px;
+    border-bottom: solid 1px #e7e7e7;
+    padding-bottom: 3px;
     margin: 0px;
+    margin-bottom: 7px;
     color: #1E3765;
-    text-decoration: underline;
   }
 
   h2 {
@@ -352,7 +359,29 @@ $: if (popupContent) {
   p {
     font-family: RobotoRegular;
     font-size: 14px;
-    opacity: 0.84;
+    opacity: 1;
+  }
+
+  a {
+    text-decoration: underline;
+    color: #1E3765;
+  }
+  a:hover {
+    color: #DC4633;
+  }
+
+  #info {
+    font-size: 11.2px;
+    padding: 0px;
+    margin: 0px;
+    border-top: solid 1px #e7e7e7;
+    margin-top: 7px;
+    padding-top:7px;
+  }
+
+  img {
+    border: solid 1px white;
+    border-radius: 5px;
   }
 
   .legend-item {
@@ -366,6 +395,12 @@ $: if (popupContent) {
     height: 13px;
     margin-right: 5px;
     border-radius: 50%;
+  }
+
+  .legend-text {
+    font-family: TradeGothicBold;
+    color: #1E3765;
+    font-size: 14px;
   }
 
   .map-overlay-dropdown {
