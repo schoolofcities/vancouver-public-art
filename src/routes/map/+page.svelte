@@ -25,15 +25,17 @@
       attributionControl: false,
 		});
 
-    // Adding zoom and rotation controls to the map
-    map.addControl(new maplibregl.NavigationControl(), 'top-left');
-
     // Adding scale bar to the map
     let scale = new maplibregl.ScaleControl({
       maxWidth: 100,
       unit: 'metric',
     });
     map.addControl(scale, 'bottom-left');
+
+    // Adding zoom and rotation controls to the map
+    map.addControl(new maplibregl.NavigationControl(), 'bottom-left');
+
+    
 
     // Adding additional layers from geojson
     map.on('load', function () {
@@ -69,11 +71,11 @@
 				'source': 'vancouverPublicTransit',
 				'layout': {},
 				'paint': {
-					'line-color': '#BE8F8F', 
-					'line-width': 3
-					//'line-dasharray': [5,2]
+					'line-color': '#F1C500', 
+					'line-width': 1.5
+					// 'line-dasharray': [1,1]
 				}
-			});
+			}, 'highway_name_major');
 
 	map.addLayer({
 				'id': 'vancouverBoundary',
@@ -81,9 +83,12 @@
 				'source': 'vancouverBoundary',
 				'layout': {},
 				'paint': {
+          'line-opacity': 0.64,
 					'line-color': '#575870', 
-					'line-width': 3}
-			});
+					'line-width': 2,
+        
+					'line-dasharray': [6,0.5,1,0.5,1,0.5]}
+			}, 'highway_name_major');
 
 	map.addLayer({
 				'id': 'vancouverPublicArt',
@@ -92,16 +97,17 @@
 				'layout': {},
 				'paint': {
 					'circle-radius': 5,
+          'circle-stroke-color': 'white', // Stroke color
+          'circle-stroke-width': 1, // Stroke width in pixels
 					'circle-color': [
 						'match',
 						['get', 'status'],
 						'In place',
-						'#CC322B', //3F7671, 93677D, 8095D6
+						'#6D247A', //3F7671, 93677D, 8095D6
 						'No longer in place',
-						'#223b53', //A1B053
+						'#DC4633', //A1B053
 						'Deaccessioned',
-						'#EEA950',
-						//others
+						'#007FA3',
 						'#ccc'
 					]
 				},
