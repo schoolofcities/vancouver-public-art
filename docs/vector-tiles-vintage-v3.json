@@ -1,6 +1,6 @@
 {
   "version": 8,
-  "name": "vector-tiles-vintage-1",
+  "name": "vector-tiles-vintage-v3-5",
   "metadata": {
     "mapbox:autocomposite": false,
     "openmaptiles:version": "3.x",
@@ -22,33 +22,7 @@
     {
       "id": "background",
       "type": "background",
-      "paint": {"background-color": "rgb(242,243,240)"}
-    },
-    {
-      "id": "park_fill",
-      "type": "fill",
-      "source": "openmaptiles",
-      "source-layer": "park",
-      "filter": ["==", "$type", "Polygon"],
-      "layout": {"visibility": "visible"},
-      "paint": {"fill-color": "rgba(180, 195, 178, 1)"}
-    },
-    {
-      "id": "landuse_residential",
-      "type": "fill",
-      "source": "openmaptiles",
-      "source-layer": "landuse",
-      "maxzoom": 16,
-      "filter": [
-        "all",
-        ["==", "$type", "Polygon"],
-        ["==", "class", "residential"]
-      ],
-      "layout": {"visibility": "visible"},
-      "paint": {
-        "fill-color": "hsl(60, 8%, 92%)",
-        "fill-opacity": {"base": 0.6, "stops": [[8, 0.8], [9, 0.6]]}
-      }
+      "paint": {"background-color": "rgba(206, 187, 174, 1)"}
     },
     {
       "id": "landcover_ice_shelf",
@@ -82,6 +56,23 @@
       }
     },
     {
+      "id": "landuse_residential",
+      "type": "fill",
+      "source": "openmaptiles",
+      "source-layer": "landuse",
+      "maxzoom": 16,
+      "filter": [
+        "all",
+        ["==", "$type", "Polygon"],
+        ["==", "class", "residential"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "fill-color": "rgba(236, 236, 233, 1)",
+        "fill-opacity": {"base": 0.6, "stops": [[8, 0.8], [9, 0.6]]}
+      }
+    },
+    {
       "id": "landcover_wood",
       "type": "fill",
       "source": "openmaptiles",
@@ -90,7 +81,7 @@
       "filter": ["all", ["==", "$type", "Polygon"], ["==", "class", "wood"]],
       "layout": {"visibility": "visible"},
       "paint": {
-        "fill-color": "rgb(220,224,220)",
+        "fill-color": "rgba(206, 187, 174, 1)",
         "fill-opacity": {"base": 1, "stops": [[8, 0], [12, 1]]}
       }
     },
@@ -103,7 +94,7 @@
       "filter": ["all", ["==", "$type", "Polygon"], ["==", "subclass", "park"]],
       "layout": {"visibility": "visible"},
       "paint": {
-        "fill-color": "rgb(210,224,210)",
+        "fill-color": "rgba(17, 57, 17, 1)",
         "fill-opacity": {"base": 1, "stops": [[8, 0], [12, 0.8]]}
       }
     },
@@ -147,7 +138,7 @@
       "source-layer": "water",
       "filter": ["==", "$type", "Polygon"],
       "layout": {"visibility": "visible"},
-      "paint": {"fill-antialias": true, "fill-color": "rgba(144, 156, 168, 1)"}
+      "paint": {"fill-antialias": true, "fill-color": "rgba(158, 177, 174, 1)"}
     },
     {
       "id": "waterway",
@@ -167,7 +158,7 @@
       "filter": ["==", "$type", "Polygon"],
       "paint": {
         "fill-antialias": true,
-        "fill-color": "hsl(95, 5%, 84%)",
+        "fill-color": "rgba(67, 136, 205, 0.3)",
         "fill-outline-color": "rgb(219, 219, 218)"
       }
     },

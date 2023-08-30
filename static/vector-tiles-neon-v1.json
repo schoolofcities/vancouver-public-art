@@ -1,6 +1,6 @@
 {
   "version": 8,
-  "name": "vector-tiles-vintage-1",
+  "name": "vector-tiles-neon-v1",
   "metadata": {
     "mapbox:autocomposite": false,
     "openmaptiles:version": "3.x",
@@ -17,12 +17,12 @@
     }
   },
   "sprite": "https://tiles.stadiamaps.com/styles/alidade-smooth/sprite",
-  "glyphs": "https://schoolofcities.github.io/fonts/fonts/{fontstack}/{range}.pbf",
+  "glyphs": "https://tiles.stadiamaps.com/fonts/{fontstack}/{range}.pbf",
   "layers": [
     {
       "id": "background",
       "type": "background",
-      "paint": {"background-color": "rgb(242,243,240)"}
+      "paint": {"background-color": "rgba(0, 0, 0, 1)"}
     },
     {
       "id": "park_fill",
@@ -31,24 +31,7 @@
       "source-layer": "park",
       "filter": ["==", "$type", "Polygon"],
       "layout": {"visibility": "visible"},
-      "paint": {"fill-color": "rgba(180, 195, 178, 1)"}
-    },
-    {
-      "id": "landuse_residential",
-      "type": "fill",
-      "source": "openmaptiles",
-      "source-layer": "landuse",
-      "maxzoom": 16,
-      "filter": [
-        "all",
-        ["==", "$type", "Polygon"],
-        ["==", "class", "residential"]
-      ],
-      "layout": {"visibility": "visible"},
-      "paint": {
-        "fill-color": "hsl(60, 8%, 92%)",
-        "fill-opacity": {"base": 0.6, "stops": [[8, 0.8], [9, 0.6]]}
-      }
+      "paint": {"fill-color": "rgba(4, 24, 4, 0.74)"}
     },
     {
       "id": "landcover_ice_shelf",
@@ -82,6 +65,23 @@
       }
     },
     {
+      "id": "landuse_residential",
+      "type": "fill",
+      "source": "openmaptiles",
+      "source-layer": "landuse",
+      "maxzoom": 16,
+      "filter": [
+        "all",
+        ["==", "$type", "Polygon"],
+        ["==", "class", "residential"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "fill-color": "rgba(236, 236, 233, 0.37)",
+        "fill-opacity": {"base": 0.6, "stops": [[8, 0.8], [9, 0.6]]}
+      }
+    },
+    {
       "id": "landcover_wood",
       "type": "fill",
       "source": "openmaptiles",
@@ -90,7 +90,7 @@
       "filter": ["all", ["==", "$type", "Polygon"], ["==", "class", "wood"]],
       "layout": {"visibility": "visible"},
       "paint": {
-        "fill-color": "rgb(220,224,220)",
+        "fill-color": "rgba(34, 30, 29, 1)",
         "fill-opacity": {"base": 1, "stops": [[8, 0], [12, 1]]}
       }
     },
@@ -103,7 +103,7 @@
       "filter": ["all", ["==", "$type", "Polygon"], ["==", "subclass", "park"]],
       "layout": {"visibility": "visible"},
       "paint": {
-        "fill-color": "rgb(210,224,210)",
+        "fill-color": "rgba(23, 38, 23, 1)",
         "fill-opacity": {"base": 1, "stops": [[8, 0], [12, 0.8]]}
       }
     },
@@ -147,7 +147,7 @@
       "source-layer": "water",
       "filter": ["==", "$type", "Polygon"],
       "layout": {"visibility": "visible"},
-      "paint": {"fill-antialias": true, "fill-color": "rgba(144, 156, 168, 1)"}
+      "paint": {"fill-antialias": true, "fill-color": "rgba(158, 177, 174, 1)"}
     },
     {
       "id": "waterway",
@@ -167,8 +167,8 @@
       "filter": ["==", "$type", "Polygon"],
       "paint": {
         "fill-antialias": true,
-        "fill-color": "hsl(95, 5%, 84%)",
-        "fill-outline-color": "rgb(219, 219, 218)"
+        "fill-color": "rgba(63, 63, 69, 1)",
+        "fill-outline-color": "rgba(92, 92, 91, 1)"
       }
     },
     {
@@ -230,7 +230,7 @@
         "visibility": "visible"
       },
       "paint": {
-        "line-color": "hsl(0, 0%, 91%)",
+        "line-color": "rgba(83, 83, 88, 1)",
         "line-opacity": 0.9,
         "line-width": {"base": 1.2, "stops": [[13, 1], [20, 10]]}
       }
@@ -304,7 +304,7 @@
         "visibility": "visible"
       },
       "paint": {
-        "line-color": "#efefef",
+        "line-color": "rgba(26, 26, 32, 1)",
         "line-width": {"base": 1.3, "stops": [[10, 2], [20, 18]]}
       }
     },
@@ -324,7 +324,7 @@
         "line-join": "round",
         "visibility": "visible"
       },
-      "paint": {"line-color": "hsla(0, 0%, 85%, 0.69)", "line-width": 1}
+      "paint": {"line-color": "rgba(217, 217, 217, 0.8)", "line-width": 1}
     },
     {
       "id": "highway_motorway_casing",
@@ -556,7 +556,7 @@
             ""
           ]
         ],
-        "text-font": ["TradeGothic LT Regular"],
+        "text-font": ["Stadia Regular"],
         "text-max-angle": 30,
         "text-pitch-alignment": "viewport",
         "text-rotation-alignment": "map",
@@ -596,7 +596,7 @@
             ""
           ]
         ],
-        "text-font": ["TradeGothic LT Italic"],
+        "text-font": ["Stadia Italic"],
         "text-letter-spacing": 0.25,
         "text-line-height": 1.55,
         "text-pitch-alignment": "viewport",
@@ -633,7 +633,7 @@
             ""
           ]
         ],
-        "text-font": ["TradeGothic LT Italic"],
+        "text-font": ["Stadia Italic"],
         "text-letter-spacing": 0.1,
         "text-line-height": 1.55,
         "text-size": {"stops": [[0, 14], [6, 16]]}
@@ -668,7 +668,7 @@
             ""
           ]
         ],
-        "text-font": ["TradeGothic LT Italic"],
+        "text-font": ["Stadia Italic"],
         "text-letter-spacing": 0.2,
         "text-line-height": 1.55,
         "text-size": 18
@@ -709,7 +709,7 @@
             ""
           ]
         ],
-        "text-font": ["TradeGothic LT Regular"],
+        "text-font": ["Stadia Regular"],
         "text-justify": "center",
         "text-line-height": 1.55,
         "text-size": 14,
@@ -751,7 +751,7 @@
             ""
           ]
         ],
-        "text-font": ["TradeGothic LT Regular"],
+        "text-font": ["Stadia Regular"],
         "text-justify": "center",
         "text-line-height": 1.55,
         "text-size": 14,
@@ -793,7 +793,7 @@
             ""
           ]
         ],
-        "text-font": ["TradeGothic LT Regular"],
+        "text-font": ["Stadia Regular"],
         "text-justify": "center",
         "text-line-height": 1.55,
         "text-size": 14,
@@ -836,7 +836,7 @@
             ""
           ]
         ],
-        "text-font": ["TradeGothic LT Regular"],
+        "text-font": ["Stadia Regular"],
         "text-justify": "center",
         "text-letter-spacing": 0.1,
         "text-line-height": 1.55,
@@ -880,7 +880,7 @@
             ""
           ]
         ],
-        "text-font": ["TradeGothic LT Regular"],
+        "text-font": ["Stadia Regular"],
         "text-line-height": 1.55,
         "text-max-angle": 30,
         "text-pitch-alignment": "viewport",
@@ -916,7 +916,7 @@
         "symbol-avoid-edges": true,
         "symbol-placement": {"base": 1, "stops": [[10, "point"], [11, "line"]]},
         "text-field": "{ref}",
-        "text-font": ["TradeGothic LT Regular"],
+        "text-font": ["Stadia Regular"],
         "text-rotation-alignment": "viewport",
         "text-size": 10
       }
@@ -940,7 +940,7 @@
         "symbol-avoid-edges": true,
         "symbol-placement": {"base": 1, "stops": [[10, "point"], [11, "line"]]},
         "text-field": "{ref}",
-        "text-font": ["TradeGothic LT Regular"],
+        "text-font": ["Stadia Regular"],
         "text-rotation-alignment": "viewport",
         "text-size": 10
       }
@@ -964,7 +964,7 @@
         "symbol-avoid-edges": true,
         "symbol-placement": "line",
         "text-field": "{ref}",
-        "text-font": ["TradeGothic LT Regular"],
+        "text-font": ["Stadia Regular"],
         "text-rotation-alignment": "viewport",
         "text-size": 10
       }
@@ -993,7 +993,7 @@
             ""
           ]
         ],
-        "text-font": ["TradeGothic LT Regular"],
+        "text-font": ["Stadia Regular"],
         "text-justify": "center",
         "text-line-height": 1.55,
         "text-offset": [0.5, 0],
@@ -1001,9 +1001,9 @@
         "visibility": "visible"
       },
       "paint": {
-        "text-color": "rgb(117, 129, 145)",
+        "text-color": "rgba(24, 24, 46, 1)",
         "text-halo-blur": 1,
-        "text-halo-color": "rgb(242,243,240)",
+        "text-halo-color": "rgba(142, 209, 213, 1)",
         "text-halo-width": 2,
         "text-opacity": 0.7
       }
@@ -1033,7 +1033,7 @@
             ""
           ]
         ],
-        "text-font": ["TradeGothic LT Regular"],
+        "text-font": ["Stadia Regular"],
         "text-justify": "left",
         "text-line-height": 1.55,
         "text-offset": [0.5, 0.2],
@@ -1070,7 +1070,7 @@
             ""
           ]
         ],
-        "text-font": ["TradeGothic LT Regular"],
+        "text-font": ["Stadia Regular"],
         "text-line-height": 1.55,
         "text-max-width": 9,
         "text-padding": 2,
@@ -1111,7 +1111,7 @@
             ""
           ]
         ],
-        "text-font": ["TradeGothic LT Regular"],
+        "text-font": ["Stadia Regular"],
         "text-justify": "left",
         "text-line-height": 1.55,
         "text-offset": [0.5, 0.2],
@@ -1154,7 +1154,7 @@
             ""
           ]
         ],
-        "text-font": ["TradeGothic LT Bold"],
+        "text-font": ["Stadia Regular"],
         "text-justify": "left",
         "text-line-height": 1.55,
         "text-offset": [0.5, 0.2],
@@ -1164,9 +1164,9 @@
       },
       "paint": {
         "icon-opacity": 0.7,
-        "text-color": "rgb(117, 129, 145)",
+        "text-color": "rgba(72, 72, 130, 1)",
         "text-halo-blur": 1,
-        "text-halo-color": "rgb(242,243,240)",
+        "text-halo-color": "rgba(23, 210, 229, 1)",
         "text-halo-width": 1
       }
     },
@@ -1203,7 +1203,7 @@
             ""
           ]
         ],
-        "text-font": ["TradeGothic LT Bold"],
+        "text-font": ["Stadia Regular"],
         "text-justify": "left",
         "text-line-height": 1.55,
         "text-offset": [0.5, 0.2],
@@ -1213,9 +1213,9 @@
       },
       "paint": {
         "icon-opacity": 0.7,
-        "text-color": "rgb(117, 129, 145)",
+        "text-color": "rgba(72, 72, 130, 1)",
         "text-halo-blur": 1,
-        "text-halo-color": "rgb(242,243,240)",
+        "text-halo-color": "rgba(23, 210, 229, 1)",
         "text-halo-width": 1
       }
     },
@@ -1249,7 +1249,7 @@
             ""
           ]
         ],
-        "text-font": ["TradeGothic LT Regular"],
+        "text-font": ["Stadia Regular"],
         "text-justify": "left",
         "text-line-height": 1.55,
         "text-offset": [0.5, 0.2],
@@ -1298,7 +1298,7 @@
             ""
           ]
         ],
-        "text-font": ["TradeGothic LT Regular"],
+        "text-font": ["Stadia Regular"],
         "text-justify": "left",
         "text-line-height": 1.55,
         "text-offset": [0.5, 0.2],
@@ -1337,7 +1337,7 @@
             ""
           ]
         ],
-        "text-font": ["TradeGothic LT Regular"],
+        "text-font": ["Stadia Regular"],
         "text-line-height": 1.55,
         "text-size": 10,
         "text-transform": "uppercase",
@@ -1378,7 +1378,7 @@
             ""
           ]
         ],
-        "text-font": ["TradeGothic LT Bold Italic"],
+        "text-font": ["Stadia Semibold"],
         "text-letter-spacing": 0.05,
         "text-line-height": 1.55,
         "text-padding": 10,
@@ -1424,7 +1424,7 @@
             ""
           ]
         ],
-        "text-font": ["TradeGothic LT Bold Italic"],
+        "text-font": ["Stadia Semibold"],
         "text-letter-spacing": 0.05,
         "text-line-height": 1.55,
         "text-size": {"base": 1.4, "stops": [[0, 12], [6, 16], [9, 24]]},
@@ -1449,7 +1449,7 @@
       "filter": ["==", "class", "continent"],
       "layout": {
         "text-field": "{name:latin}",
-        "text-font": ["TradeGothic LT Bold"],
+        "text-font": ["Stadia Bold"],
         "text-letter-spacing": 0.1,
         "text-max-width": 6.25,
         "text-size": 16,

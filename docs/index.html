@@ -5,7 +5,7 @@
 	<meta charset="utf-8" />
 	<script src='https://unpkg.com/maplibre-gl@latest/dist/maplibre-gl.js'></script>
 	<link href='https://unpkg.com/maplibre-gl@latest/dist/maplibre-gl.css' rel='stylesheet' />
-	<link rel="icon" href="%sveltekit.assets%/favicon.svg" />
+	<link rel="icon" href="./favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 	<style>
@@ -13,7 +13,11 @@
         html, body, #map { height: 100%; }
     </style>
 	<title>Vancouver Public Art Map | School of Cities</title>
-	%sveltekit.head%
+	
+		<link rel="modulepreload" href="./_app/immutable/entry/start.479a3a1a.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index.3c8b7f5e.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.b05fd8bd.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/app.9012d2ae.js">
 
 	<meta name="description" content="An interactive map visualizing the locations and noting the details of public art installations in the City of Vancouver">
 	<meta name="author" content="Jeff Allen">
@@ -36,7 +40,26 @@
 </head>
 
 <body>
-	<div style="display: contents">%sveltekit.body%</div>
+	<div style="display: contents">
+			<script>
+				{
+					__sveltekit_1srauuw = {
+						assets: "/vancouver-public-art",
+						base: new URL(".", location).pathname.slice(0, -1),
+						env: {}
+					};
+
+					const element = document.currentScript.parentElement;
+
+					Promise.all([
+						import("./_app/immutable/entry/start.479a3a1a.js"),
+						import("./_app/immutable/entry/app.9012d2ae.js")
+					]).then(([kit, app]) => {
+						kit.start(app, element);
+					});
+				}
+			</script>
+		</div>
 	<div id='map'></div>
 
 </body>
