@@ -291,7 +291,6 @@ $: if (popupContent) {
   }
 
   :global(body) {
-    background-color: blue;
     overflow: hidden;
   }
   @font-face {
