@@ -286,8 +286,13 @@ $: if (popupContent) {
 </main>
 
 <style>
-  :global(body) {
+  main {
     overflow-y: hidden;
+  }
+
+  :global(body) {
+    background-color: blue;
+    overflow: hidden;
   }
   @font-face {
     font-family: TradeGothicBold;
