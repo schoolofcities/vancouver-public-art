@@ -7,3 +7,23 @@ Interactive visualization of public artworks in the City of Vancouver boundary. 
 
 ### Technology used:
 MapLibre GL JS, Maputnik, Stadia Maps, svelte, QGIS
+
+
+### Developing Locally
+
+Run the following your terminal
+
+```
+git clone https://github.com/schoolofcities/vancouver-public-art
+cd vancouver-public-art
+npm install
+npm run dev
+```
+
+Then go to `http://localhost:5173/vancouver-public-art/map`
+
+To build...
+
+```
+npm run build
+```

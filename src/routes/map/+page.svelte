@@ -364,7 +364,7 @@ $: if (popupContent) {
   }
 
   h1 {
-    font-size: 20px;
+    font-size: 24px;
     font-family: TradeGothicBold;
     padding: 0px;
     padding-left: 4px;
@@ -381,7 +381,7 @@ $: if (popupContent) {
   }
 
   h2 {
-    font-size: 26px;
+    font-size: 24px;
     font-family: TradeGothicBold;
     padding: 2px;
     margin: 0px;
