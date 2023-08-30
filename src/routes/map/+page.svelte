@@ -254,7 +254,7 @@ $: if (popupContent) {
       <span class='legend-text'>No Longer In Place / Deaccessioned</span>
     </div>
     <p id="info">
-      Map created by <a href="">Irene Chang</a> and <a href="">Jeff Allen</a> at the <a href="">School of Cities</a> with data from the  <a href="">City of Vancouver</a>. More on <a href="">GitHub</a>.
+      Map created by <a href="https://www.linkedin.com/in/irene-kcc/">Irene Chang</a> and <a href="https://jamaps.github.io/about.html">Jeff Allen</a> at the <a href="https://schoolofcities.utoronto.ca/">School of Cities</a> with data from the  <a href="https://opendata.vancouver.ca/explore/dataset/public-art/information/">City of Vancouver</a>. More on <a href="https://github.com/schoolofcities/vancouver-public-art">GitHub</a>.
     </p>
   </div>
 
@@ -360,7 +360,7 @@ $: if (popupContent) {
   }
 
   h1 {
-    font-size: 26px;
+    font-size: 20px;
     font-family: TradeGothicBold;
     padding: 0px;
     padding-left: 4px;
