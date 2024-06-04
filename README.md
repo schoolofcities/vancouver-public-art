@@ -1,4 +1,7 @@
 # Vancouver Public Art Map
+
+*Last updated September 2023*
+
 Interactive visualization of public artworks in the City of Vancouver boundary. When a user clicks on a point on the map, a popup window will appear on the left. This popup will present details about the selected artwork: artwork name, an image, art type, a concise description, current status (whether the artwork is still in place or has been removed/deaccessioned), primary materials used, location address, and the year of installation.
 
 ## Data Sources:

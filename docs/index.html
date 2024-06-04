@@ -14,10 +14,10 @@
     </style>
 	<title>Vancouver Public Art Map | School of Cities</title>
 	
-		<link rel="modulepreload" href="./_app/immutable/entry/start.479a3a1a.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/start.256690cb.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index.3c8b7f5e.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.b05fd8bd.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/app.9012d2ae.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.9c32b354.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/app.c39c13b8.js">
 
 	<meta name="description" content="An interactive map visualizing the locations and noting the details of public art installations in the City of Vancouver">
 	<meta name="author" content="Jeff Allen">
@@ -39,11 +39,19 @@
 	
 </head>
 
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XB09CWTEWB"></script>
+<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-XB09CWTEWB');
+</script>
+
 <body>
 	<div style="display: contents">
 			<script>
 				{
-					__sveltekit_1srauuw = {
+					__sveltekit_mrtpjt = {
 						assets: "/vancouver-public-art",
 						base: new URL(".", location).pathname.slice(0, -1),
 						env: {}
@@ -52,8 +60,8 @@
 					const element = document.currentScript.parentElement;
 
 					Promise.all([
-						import("./_app/immutable/entry/start.479a3a1a.js"),
-						import("./_app/immutable/entry/app.9012d2ae.js")
+						import("./_app/immutable/entry/start.256690cb.js"),
+						import("./_app/immutable/entry/app.c39c13b8.js")
 					]).then(([kit, app]) => {
 						kit.start(app, element);
 					});
